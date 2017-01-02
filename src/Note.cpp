@@ -3,14 +3,38 @@
 //
 #include <cmath>
 #include <string>
+#include <iostream>
+
 #include "Note.h"
 
-void Note::setFrequency() {
+using namespace std;
 
+Note::Note(float frequency, int position){
+	this->setFrequency(frequency);
+	this->setName(position);
 }
 
-void Note::setNote(std::string name, float baseFrequency) {
-    this->name = name;
-    this->frequency = baseFrequency * pow(1.059463094359, 3);
-    this->setFrequency();
+std::string Note::getName(){
+	return NotesName[this->name];
+}
+
+void Note::setName(int position) {
+    this->name = NotesEnum(position);
+}
+
+float Note::getFrequency(){
+	return this->frequency;
+}
+
+void Note::setFrequency(float frequency) {
+	this->frequency = frequency;
+}
+
+bool Note::isInRange(float frequency){
+	float variation = this->frequency - frequency;
+	cout << "Checking frequency " << frequency << " is closed to : " << this->frequency << "for variation of : " << variation << endl;
+	if (variation <= 0.5 && variation >= -0.5){
+		return true;
+	}
+	return false;
 }

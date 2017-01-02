@@ -15,6 +15,24 @@ void playInstrument(Instrument instrument, string name){
     }
 }
 
+void queryFreq(Notes* notes){
+    cout << "Frequency : " << flush;
+    string freq;
+    cin >> freq;
+    if (freq == "q"){
+        return;
+    }
+    Note* note = notes->getNote(stof(freq));
+
+    if (note->getName() == ""){
+        cout << "Can't find the note " << endl;
+    } else {
+    	cout << note->getName() << endl;
+    }
+
+    queryFreq(notes);
+}
+
 int main() {
     Instrument piano440;
     Instrument piano438;
@@ -24,14 +42,19 @@ int main() {
 
 
     piano438.setCenterLa(438);
-	playInstrument(piano440, "440");
+    playInstrument(piano440, "440");
     cout << "start instrument 438" << endl;
     cout << "Center La" << piano438.getCenterLa() << endl;
     playInstrument(piano438, "438");
 
-    Notes notes;
-    notes.setNotes(440.0);
-    notes.printNotes();
+    Notes* notes = new Notes();
+    notes->setNotes(440.0);
+    notes->printNotes();
+
+    cout << "before queryFreq" << endl;
+    queryFreq(notes);
+    cout << "after queryFreq" << endl;
+    delete notes;
 
     return 0;
 }

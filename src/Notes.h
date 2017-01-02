@@ -8,18 +8,22 @@
 #include <map>
 #include "Note.h"
 
-// enum NOTESNAME { do, re, mi, fa, sol, la, si };
-const int A4POSITION = 12*4-2-1; // 4 * 12 = si - 2 half note -1 for index 0
-const int NUMBER_OF_NOTES = 8*12;
+const int NOTES_PER_SCALE = 12;
+const int A4POSITION = (4*NOTES_PER_SCALE)-2-1; // 4 * 12 = si - 2 half note -1 for index 0
+const int NUMBER_OF_NOTES = 8*NOTES_PER_SCALE;
+
 
 class Notes {
 private:
-    float notes[NUMBER_OF_NOTES];
+    Note* notes[NUMBER_OF_NOTES];
     float la4Frequency;
     float getFrequency(int position);
 
 public:
+    Notes();
     void setNotes(float la4Frequency);
+    Note* getNote(float frequency);
+    float getFrequency(NotesEnum note);
     void printNotes();
 };
 

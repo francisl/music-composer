@@ -24,3 +24,6 @@ cmake-build-debug/
 compiling_error.txt
 CMakeLists.txt
 .idea
+/Default/
+/Debug/
+Composer.pro
